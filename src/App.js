@@ -1,8 +1,12 @@
+import Subscribers from "./pages/Subscribers";
+import Campaigns from "./pages/Campaigns";
+import { ChakraProvider } from "@chakra-ui/react"
 function App() {
   return (
-    <div className="App">
-      <h1>Hello in hackaton</h1>
-    </div>
+    <ChakraProvider>
+      <Subscribers />
+      <Campaigns />
+    </ChakraProvider>
   );
 }
 
