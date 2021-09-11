@@ -3,7 +3,7 @@ import { Flex, Box } from "@chakra-ui/react"
 const CampaignList = () => {
 
     const [campaigns, setCampaigns] = useState();
-    const apiKey = 'key3B3q4yNmap0UCm'
+    const apiKey = process.env.REACT_APP_API_KEY
 
     useEffect(() => {
         fetch(`https://api.airtable.com/v0/appBFUZ0hSOmXC476/campaigns?api_key=${apiKey}`)
@@ -11,8 +11,8 @@ const CampaignList = () => {
             .then(data => {
                 setCampaigns(data.records)
             })
+            .catch(err => console.log(err))
     }, [])
-    console.log(campaigns && campaigns[0])
     return (
         <Box>
             <Box borderBottom='2px solid black'>

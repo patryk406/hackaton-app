@@ -21,14 +21,14 @@ const NewCampaign = () => {
                         name='content'
                         onChange={handleContent}
                         type='text'
-                        placeholder='type your email'
+                        placeholder='type your content'
                         size="md" />
                     <Input
                         value={subject}
                         onChange={handleSubject}
                         type='name'
                         name='subject'
-                        placeholder='type your name'
+                        placeholder='type your subject'
                         size="md" />
                     <Button type='submit' colorScheme="teal" size="sm">Send</Button>
                 </Stack>

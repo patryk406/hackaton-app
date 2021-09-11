@@ -3,7 +3,7 @@ import { Flex, Box } from "@chakra-ui/react"
 const SubscribersList = () => {
 
     const [subscribers, setSubscribers] = useState();
-    const apiKey = 'key3B3q4yNmap0UCm'
+    const apiKey = process.env.REACT_APP_API_KEY
 
     useEffect(() => {
         fetch(`https://api.airtable.com/v0/appBFUZ0hSOmXC476/subscribers?api_key=${apiKey}`)
@@ -12,7 +12,6 @@ const SubscribersList = () => {
                 setSubscribers(data.records)
             })
     }, [])
-    console.log(subscribers && subscribers[0])
     return (
         <Box>
             <Box borderBottom='2px solid black'>
