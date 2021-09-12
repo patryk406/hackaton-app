@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Flex, Box } from "@chakra-ui/react"
+import {
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+} from "@chakra-ui/react"
 const CampaignList = () => {
 
     const [campaigns, setCampaigns] = useState();
@@ -14,27 +20,29 @@ const CampaignList = () => {
             .catch(err => console.log(err))
     }, [])
     return (
-        <Box>
-            <Box borderBottom='2px solid black'>
-                <Flex justify='space-between'>
-                    <Box px='1rem'>Subject:</Box>
-                    <Box>Status:</Box>
-                    <Box >Created:</Box>
-                    <Box px='1rem'>Content:</Box>
-                </Flex>
-            </Box>
+        <Table >
+            <Thead>
+                <Tr>
+                    <Th px='1rem'>Subject:</Th>
+                    <Th>Status:</Th>
+                    <Th >Created:</Th>
+                    <Th px='1rem'>Content:</Th>
+                </Tr>
+            </Thead>
             {campaigns && campaigns.map((elem) => {
                 return (
-                    <Flex justify='space-between' key={elem.id}>
-                        <Box px='1rem'>{elem.fields.subject}</Box>
-                        <Box>{elem.fields.status}</Box>
-                        <Box >{elem.fields.created}</Box>
-                        <Box px='1rem'>{elem.fields.content}</Box>
-                    </Flex>
+                    <Tbody key={elem.id}>
+                        <Tr>
+                            <Th px='1rem'>{elem.fields.subject}</Th>
+                            <Th>{elem.fields.status}</Th>
+                            <Th >{elem.fields.created}</Th>
+                            <Th px='1rem'>{elem.fields.content}</Th>
+                        </Tr>
+                    </Tbody>
                 )
 
             })}
-        </Box >
+        </Table >
     )
 }
 

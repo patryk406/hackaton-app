@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Flex, Box } from "@chakra-ui/react"
+import {
+    Table,
+    Thead,
+    Tbody,
+    Tr,
+    Th,
+} from "@chakra-ui/react"
 const SubscribersList = () => {
 
     const [subscribers, setSubscribers] = useState();
@@ -13,25 +19,27 @@ const SubscribersList = () => {
             })
     }, [])
     return (
-        <Box>
-            <Box borderBottom='2px solid black'>
-                <Flex justify='space-between'>
-                    <Box px='1rem'>Email:</Box>
-                    <Box>Name:</Box>
-                    <Box px='1rem'>Created:</Box>
-                </Flex>
-            </Box>
+        <Table>
+            <Thead>
+                <Tr justify='space-between'>
+                    <Th px='1rem'>Email:</Th>
+                    <Th>Name:</Th>
+                    <Th px='1rem'>Created:</Th>
+                </Tr>
+            </Thead>
             {subscribers && subscribers.map((elem) => {
                 return (
-                    <Flex justify='space-between' key={elem.id}>
-                        <Box px='1rem'>{elem.fields.email}</Box>
-                        <Box>{elem.fields.name}</Box>
-                        <Box px='1rem'>{elem.fields.created}</Box>
-                    </Flex>
+                    <Tbody key={elem.id}>
+                        <Tr>
+                            <Th px='1rem'>{elem.fields.email}</Th>
+                            <Th>{elem.fields.name}</Th>
+                            <Th px='1rem'>{elem.fields.created}</Th>
+                        </Tr>
+                    </Tbody>
                 )
 
             })}
-        </Box >
+        </Table >
     )
 }
 

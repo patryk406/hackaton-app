@@ -1,4 +1,4 @@
-import { Input, Button, Stack, Flex } from "@chakra-ui/react"
+import { Input, Button, ButtonGroup, Stack, Flex } from "@chakra-ui/react"
 import { useState } from 'react'
 const NewCampaign = () => {
     const [subject, setSubject] = useState('');
@@ -30,7 +30,10 @@ const NewCampaign = () => {
                         name='subject'
                         placeholder='type your subject'
                         size="md" />
-                    <Button type='submit' colorScheme="teal" size="sm">Send</Button>
+                    <ButtonGroup >
+                        <Button type='submit' colorScheme="teal" size="sm">Send</Button>
+                        <Button type='submit' colorScheme="pink" size="sm">Save</Button>
+                    </ButtonGroup>
                 </Stack>
             </form>
         </Flex>
