@@ -6,18 +6,20 @@ import {
     Tr,
     Th,
 } from "@chakra-ui/react"
+import api from '../../api'
 const SubscribersList = () => {
 
     const [subscribers, setSubscribers] = useState();
-    const apiKey = process.env.REACT_APP_API_KEY
-
     useEffect(() => {
-        fetch(`https://api.airtable.com/v0/appBFUZ0hSOmXC476/subscribers?api_key=${apiKey}`)
-            .then(res => res.json())
+        api
+            .get(`/subscribers`)
             .then(data => {
                 setSubscribers(data.records)
             })
+            .catch(err => console.log(err))
     }, [])
+
+
     return (
         <Table>
             <Thead>

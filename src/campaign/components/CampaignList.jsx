@@ -6,14 +6,13 @@ import {
     Tr,
     Th,
 } from "@chakra-ui/react"
+import api from '../../api'
 const CampaignList = () => {
 
     const [campaigns, setCampaigns] = useState();
-    const apiKey = process.env.REACT_APP_API_KEY
 
     useEffect(() => {
-        fetch(`https://api.airtable.com/v0/appBFUZ0hSOmXC476/campaigns?api_key=${apiKey}`)
-            .then(res => res.json())
+        api.get('/campaigns')
             .then(data => {
                 setCampaigns(data.records)
             })
