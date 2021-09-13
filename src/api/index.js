@@ -4,14 +4,14 @@ function request(endpoint, method = 'GET', data = null) {
     const config = {
         method,
         headers: {
-            'Content-type': 'aplication/json',
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json'
         }
     };
-    if (method === 'Post' || method === 'PATCH') {
+    if (method === 'POST' || method === 'PATCH') {
         config.body = JSON.stringify(data)
     }
-    const url = `${API_URL}${endpoint}?api_key=${apiKey}`
+    const url = `${API_URL}${endpoint}`
     return fetch(url, config)
         .then(response => {
             // response status
@@ -23,6 +23,7 @@ function get(endpoint) {
     return request(endpoint);
 }
 function post(endpoint, data) {
+    console.log(data)
     return request(endpoint, 'POST', data)
 }
 function patch(endpoint, data) {

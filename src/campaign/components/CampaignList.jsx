@@ -12,9 +12,9 @@ const CampaignList = () => {
     const [campaigns, setCampaigns] = useState();
     const [isLoading, setLoading] = useState(true);
     const [hasError, setError] = useState(false);
-
+    const endpoint = '/campaigns'
     useEffect(() => {
-        api.get('/campaigns')
+        api.get(endpoint)
             .then(data => {
                 setCampaigns(data.records)
                 setLoading(false)

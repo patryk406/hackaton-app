@@ -12,9 +12,10 @@ const SubscribersList = () => {
     const [subscribers, setSubscribers] = useState();
     const [isLoading, setLoading] = useState(true);
     const [hasError, setError] = useState(false);
+    const endpoint = '/subscribers'
     useEffect(() => {
         api
-            .get(`/subscribers`)
+            .get(endpoint)
             .then(data => {
                 setSubscribers(data.records)
                 setLoading(false)
@@ -25,7 +26,9 @@ const SubscribersList = () => {
                 setLoading(false)
             })
     }, [])
-
+    const convertTime = (params) => {
+        return new Date(params).toDateString();
+    }
 
     return (
         <>
@@ -45,7 +48,7 @@ const SubscribersList = () => {
                             <Tr>
                                 <Th px='1rem'>{elem.fields.email}</Th>
                                 <Th>{elem.fields.name}</Th>
-                                <Th px='1rem'>{elem.fields.created}</Th>
+                                <Th px='1rem'>{convertTime(elem.fields.created)}</Th>
                             </Tr>
                         </Tbody>
                     )
