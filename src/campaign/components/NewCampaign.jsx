@@ -1,51 +1,49 @@
 import { Input, Button, ButtonGroup, Stack, Flex } from "@chakra-ui/react"
 import api from '../../api'
 import { useState } from 'react'
+import { useForm } from "react-hook-form";
 const NewCampaign = () => {
-    const [subject, setSubject] = useState('');
-    const [content, setContent] = useState('');
+    const {
+        watch,
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset
+    } = useForm();
     const endpoint = '/campaigns'
-    let campaign = {
-        "fields": {
-            "status": "Draft",
-            "subject": subject,
-            "content": content
-        }
+    const handlePosting = (data) => {
+        console.log(data)
+        api.post(endpoint, {
+            fields: {
+                status: "Draft",
+                subject: data.subject,
+                content: data.content
+            }
+        })
+        reset()
     }
-    const handleSubject = (e) => {
-        setSubject(e.target.value)
-    }
-    const handleContent = (e) => {
-        setContent(e.target.value)
-    }
-    const handlePosting = () => {
-        api.post(endpoint, campaign)
-    }
-    const handleSubmit = (e) => {
-        handlePosting()
-        e.preventDefault()
-    }
+    console.log(watch("status"));
     return (
-        <Flex justify='center' align='center' onSubmit={handleSubmit}>
-            <form>
-                <Stack spacing={4} direction="column" align="center" >
+        <Flex justify='center' align='center' >
+            <form onSubmit={handleSubmit(handlePosting)}>
+                <Stack spacing={4} direction="column" align="center"  >
                     <Input
-                        value={content}
+                        {...register("content", { required: true })}
                         name='content'
-                        onChange={handleContent}
                         type='text'
                         placeholder='type your content'
                         size="md" />
+                    {errors.content && <>this field is needed</>}
                     <Input
-                        value={subject}
-                        onChange={handleSubject}
-                        type='name'
+                        {...register("subject", { required: true })}
+                        type='text'
                         name='subject'
                         placeholder='type your subject'
                         size="md" />
-                    <ButtonGroup >
-                        <Button onClick={handleSubmit} type='submit' colorScheme="teal" size="sm">Send</Button>
-                        {/* <Button type='submit' colorScheme="pink" size="sm">Save</Button> */}
+                    {errors.subject && <>this field is needed</>}
+                    <ButtonGroup>
+                        <Button value='Draft' type='submit' colorScheme="pink" size="sm">Save</Button>
+                        <Button value='Send' type='submit' colorScheme="teal" size="sm">Send</Button>
                     </ButtonGroup>
                 </Stack>
             </form>
