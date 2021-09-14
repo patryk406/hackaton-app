@@ -5,6 +5,7 @@ import {
     Tbody,
     Tr,
     Th,
+    Button
 } from "@chakra-ui/react"
 import api from '../../api'
 const CampaignList = () => {
@@ -24,7 +25,10 @@ const CampaignList = () => {
                 setError(true)
                 setLoading(false)
             })
-    }, [])
+    }, [campaigns])
+    const handleDelete = () => {
+        console.log('clicked')
+    }
     return (
         <>
             {isLoading && <p className='loader'>Loading...</p>}
@@ -45,6 +49,7 @@ const CampaignList = () => {
                                 <Th>{elem.fields.status}</Th>
                                 <Th >{elem.fields.created}</Th>
                                 <Th px='1rem'>{elem.fields.content}</Th>
+                                <Th>{elem.fields.status === 'Draft' ? <Button onClick={handleDelete}>X</Button> : ''}</Th>
                             </Tr>
                         </Tbody>
                     )

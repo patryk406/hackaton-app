@@ -55,6 +55,7 @@ const SubscribersList = () => {
 
                 })}
             </Table >
+            {hasError && <>Something went wrong, please try again</>}
         </>
     )
 }
