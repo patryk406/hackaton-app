@@ -32,9 +32,10 @@ function patch(endpoint, data) {
 function _delete(endpoint) {
     return request(endpoint, 'DELETE')
 }
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     get,
     post,
     patch,
     delete: _delete
-}
+};
