@@ -32,9 +32,9 @@ const SubscribersList = () => {
 
     return (
         <>
+            {hasError && <>Something went wrong, please try again</>}
             {isLoading && <p className='loader'>Loading...</p>}
             <Table>
-
                 <Thead>
                     <Tr justify='space-between'>
                         <Th px='1rem'>Email:</Th>
@@ -52,10 +52,9 @@ const SubscribersList = () => {
                             </Tr>
                         </Tbody>
                     )
-
                 })}
             </Table >
-            {hasError && <>Something went wrong, please try again</>}
+
         </>
     )
 }

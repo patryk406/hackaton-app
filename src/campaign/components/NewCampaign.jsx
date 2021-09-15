@@ -68,8 +68,6 @@ const NewCampaign = () => {
         }
         reset()
     }
-
-
     return (
         <Flex justify='center' align='center'>
             <form>

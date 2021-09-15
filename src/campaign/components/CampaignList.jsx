@@ -9,10 +9,10 @@ import {
 } from "@chakra-ui/react"
 import api from '../../api'
 const CampaignList = () => {
-
     const [campaigns, setCampaigns] = useState();
     const [isLoading, setLoading] = useState(true);
     const [hasError, setError] = useState(false);
+    const [hasDelete, setDelete] = useState(false)
     const endpoint = '/campaigns'
     useEffect(() => {
         api.get(endpoint)
@@ -25,13 +25,24 @@ const CampaignList = () => {
                 setError(true)
                 setLoading(false)
             })
-    }, [campaigns])
-    const handleDelete = () => {
-        console.log('clicked')
+        setDelete(false)
+    }, [hasDelete])
+    const handleDelete = (id) => {
+        console.log(id)
+        api
+            .delete(`${endpoint}/${id}`)
+            .then(res => {
+                setDelete(true)
+            })
+            .catch(err => {
+                console.log(err)
+                setDelete(false)
+            })
     }
     return (
         <>
             {isLoading && <p className='loader'>Loading...</p>}
+            {hasError && <p>Something went wrong, please try again</p>}
             <Table >
                 <Thead>
                     <Tr>
@@ -49,7 +60,14 @@ const CampaignList = () => {
                                 <Th>{elem.fields.status}</Th>
                                 <Th >{elem.fields.created}</Th>
                                 <Th px='1rem'>{elem.fields.content}</Th>
-                                <Th>{elem.fields.status === 'Draft' ? <Button onClick={handleDelete}>X</Button> : ''}</Th>
+                                <Th>
+                                    {elem.fields.status === 'Draft'
+                                        ?
+                                        <Button colorScheme='pink' onClick={() => handleDelete(elem.id)}>X</Button>
+                                        :
+                                        ''}
+                                </Th>
+
                             </Tr>
                         </Tbody>
                     )
