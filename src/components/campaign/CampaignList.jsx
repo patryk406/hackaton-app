@@ -27,16 +27,17 @@ const CampaignList = () => {
             })
         setDelete(false)
     }, [hasDelete])
-    const handleDelete = (id) => {
-        console.log(id)
+    const handleDelete = (id) => (e) => {
         api
             .delete(`${endpoint}/${id}`)
             .then(res => {
                 setDelete(true)
+                setError(false)
             })
             .catch(err => {
                 console.log(err)
                 setDelete(false)
+                setError(true)
             })
     }
     return (
@@ -61,11 +62,8 @@ const CampaignList = () => {
                                 <Th >{elem.fields.created}</Th>
                                 <Th px='1rem'>{elem.fields.content}</Th>
                                 <Th>
-                                    {elem.fields.status === 'Draft'
-                                        ?
-                                        <Button colorScheme='pink' onClick={() => handleDelete(elem.id)}>X</Button>
-                                        :
-                                        ''}
+                                    {elem.fields.status === 'Draft' && <Button colorScheme='pink' onClick={handleDelete(elem.id)}>X</Button>}
+                                    {hasError && <>Item can't be deleted or some other problem occured</>}
                                 </Th>
 
                             </Tr>

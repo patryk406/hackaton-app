@@ -1,5 +1,5 @@
-import { NewSubscriber, SubscribersList } from './subscribers/components'
-import { NewCampaign, CampaignList } from './campaign/components'
+import { NewSubscriber, SubscribersList } from './components/subscribers'
+import { NewCampaign, CampaignList } from './components/campaign'
 import Nav from './pages/Nav'
 import { ChakraProvider, Input, Flex } from "@chakra-ui/react"
 import {
@@ -11,17 +11,13 @@ import { useState } from 'react'
 import './app.css'
 function App() {
   const [isLogin, setLogin] = useState(false);
-  const password = 'SzkolaReacta'
+  const password = process.env.REACT_APP_SECRET_CODE
   if (!isLogin) {
     return (
       <ChakraProvider>
         <Flex bgGradient="linear(to-t, cyan.400, pink.700)" justify='center' alignItems='center' h='100vh
       '>
-          <Input background='gray.600' color='white' fontWeight='bold' borderRadius='10px' fontSize='1rem' textAlign='center' w='600px' h='50px' placeholder='Type super secret code! known by only elite group of react-maniacs!' onChange={(e) => {
-            if (e.target.value === password) {
-              setLogin(true);
-            }
-          }} />
+          <Input background='gray.600' color='white' fontWeight='bold' borderRadius='10px' fontSize='1rem' textAlign='center' w='600px' h='50px' placeholder='Type super secret code! known by only elite group of react-maniacs!' onChange={(e) => setLogin(e.target.value === password && true)} />
         </Flex>
       </ChakraProvider >
     )

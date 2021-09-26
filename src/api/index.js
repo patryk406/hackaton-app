@@ -1,4 +1,4 @@
-const API_URL = 'https://api.airtable.com/v0/appBFUZ0hSOmXC476';
+const API_URL = `https://api.airtable.com/v0/${process.env.REACT_APP_DB_ID}`;
 const apiKey = process.env.REACT_APP_API_KEY
 function request(endpoint, method = 'GET', data = null) {
     const config = {

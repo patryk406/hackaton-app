@@ -44,7 +44,7 @@ const NewCampaign = () => {
                 campaign: data.content,
                 email: elem.fields.email
             }
-            emailjs.send("itachi090", "template_q4l8byi", content, "user_xehx51emRLRfYA14tydRw")
+            emailjs.send(process.env.REACT_APP_MAIL_USER, process.env.REACT_APP_MAIL_TEMPLATE, content, process.env.REACT_APP_MAIL_KEY)
                 .then(() => {
                     setError(false)
                 })

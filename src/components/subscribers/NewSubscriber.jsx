@@ -1,7 +1,6 @@
 import { Input, Button, Stack, Flex } from "@chakra-ui/react"
 import api from '../../api'
 import { useForm } from "react-hook-form";
-import { useState } from 'react'
 const NewSubscriber = () => {
     // init form from hooks
     const {
