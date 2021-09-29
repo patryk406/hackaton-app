@@ -1,6 +1,8 @@
-import { Input, Button, Stack, Flex } from "@chakra-ui/react"
+import { useForm } from 'react-hook-form';
+
 import api from '../../api'
-import { useForm } from "react-hook-form";
+import NewSubscriberView from './components/NewSubscriberView';
+
 const NewSubscriber = () => {
     // init form from hooks
     const {
@@ -21,27 +23,6 @@ const NewSubscriber = () => {
         })
         reset()
     }
-    return (
-        <Flex justify='center' align='center'>
-            <form onSubmit={handleSubmit(handlePosting)}>
-                <Stack spacing={4} direction="column" align="center" >
-                    <Input
-                        {...register("email", { required: true })}
-                        type='email'
-                        placeholder='type your email'
-                        size="md" />
-                    {errors.email && <>this field is needed</>}
-                    <Input
-                        {...register("name", { required: true })}
-                        type='name'
-                        name='name'
-                        placeholder='type your name'
-                        size="md" />
-                    {errors.name && <>this field is needed</>}
-                    <Button type='submit' colorScheme="teal" size="sm">Send</Button>
-                </Stack>
-            </form>
-        </Flex >
-    )
+    return (<NewSubscriberView handlePosting={handlePosting} handleSubmit={handleSubmit} register={register} errors={errors} />)
 }
 export default NewSubscriber

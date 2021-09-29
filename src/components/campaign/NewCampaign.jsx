@@ -1,10 +1,11 @@
-import { Input, Button, ButtonGroup, Stack, Flex, Textarea } from "@chakra-ui/react"
-import api from '../../api'
 import { useState, useEffect } from 'react'
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
+
 import emailjs from 'emailjs-com'
 
-// template_q4l8byi
+import api from '../../api'
+import NewCampaignView from './components/NewCampaignView'
+
 const NewCampaign = () => {
     const {
         register,
@@ -16,6 +17,7 @@ const NewCampaign = () => {
     const [subscribers, setSubscribers] = useState([]);
     const [hasError, setError] = useState(false);
     const [message, setMessage] = useState(false);
+
     useEffect(() => {
         api
             .get('/subscribers')
@@ -29,7 +31,7 @@ const NewCampaign = () => {
     const handleDraft = (data) => {
         api.post(endpoint, {
             fields: {
-                status: "Draft",
+                status: 'Draft',
                 subject: data.subject,
                 content: data.content
             }
@@ -60,7 +62,7 @@ const NewCampaign = () => {
             setMessage(false)
             api.post(endpoint, {
                 fields: {
-                    status: "Send",
+                    status: 'Send',
                     subject: data.subject,
                     content: data.content
                 }
@@ -69,32 +71,13 @@ const NewCampaign = () => {
         reset()
     }
     return (
-        <Flex justify='center' align='center'>
-            <form>
-                <Stack spacing={4} direction="column" align="center"  >
-                    <Input
-                        {...register("subject", { required: true })}
-                        type='text'
-                        name='subject'
-                        placeholder='type your subject'
-                        size="md" />
-                    {errors.subject && <>this field is needed</>}
-                    <Textarea
-                        {...register("content", { required: true })}
-                        name='content'
-                        type='text'
-                        placeholder='type your content'
-                        size="md"
-                        cols={50} />
-                    {errors.content && <>this field is needed</>}
-                    <ButtonGroup>
-                        <Button onClick={handleSubmit(handleDraft)} value='Draft' type='submit' colorScheme="pink" size="sm">Save</Button>
-                        <Button onClick={handleSubmit(handleSend)} value='Send' type='submit' colorScheme="teal" size="sm">Send</Button>
-                    </ButtonGroup>
-                </Stack>
-            </form>
-            {message && <>Something goes wrong, please try again later</>}
-        </Flex>
+        <NewCampaignView
+            register={register}
+            errors={errors}
+            message={message}
+            handleSubmit={handleSubmit}
+            handleDraft={handleDraft}
+            handleSend={handleSend} />
     )
 }
 export default NewCampaign
