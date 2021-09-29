@@ -23,11 +23,8 @@ const SubscribersList = () => {
                 setLoading(false)
             })
     }, [])
-    const convertTime = (params) => {
-        return new Date(params).toDateString();
-    }
 
-    return (<SubscribersListView subscribers={subscribers} hasError={hasError} isLoading={isLoading} convertTime={convertTime} />)
+    return (<SubscribersListView subscribers={subscribers} hasError={hasError} isLoading={isLoading} />)
 }
 
 

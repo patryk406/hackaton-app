@@ -18,16 +18,6 @@ const NewCampaign = () => {
     const [hasError, setError] = useState(false);
     const [message, setMessage] = useState(false);
 
-    useEffect(() => {
-        api
-            .get('/subscribers')
-            .then(data => {
-                setSubscribers(data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
     const handleDraft = (data) => {
         api.post(endpoint, {
             fields: {
@@ -70,6 +60,17 @@ const NewCampaign = () => {
         }
         reset()
     }
+    useEffect(() => {
+        api
+            .get('/subscribers')
+            .then(data => {
+                setSubscribers(data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [handleSubmit])
+
     return (
         <NewCampaignView
             register={register}

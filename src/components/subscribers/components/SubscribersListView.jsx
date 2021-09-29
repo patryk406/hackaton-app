@@ -21,7 +21,7 @@ function SubscribersListView({ hasError, isLoading, subscribers, convertTime }) 
                 </Thead>
                 {subscribers && subscribers.map((elem) => {
                     return (
-                        <Subscriber id={elem.id} email={elem.fields.email} name={elem.fields.name} convertTime={convertTime} created={elem.fields.created} />
+                        <Subscriber key={elem.id} email={elem.fields.email} name={elem.fields.name} created={elem.fields.created} />
                     )
                 })}
             </Table >

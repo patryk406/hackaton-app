@@ -10,7 +10,6 @@ const CampaignList = () => {
     const [hasDelete, setDelete] = useState(false)
     const endpoint = '/campaigns'
 
-
     const handleDelete = (id) => (e) => {
         api
             .delete(`${endpoint}/${id}`)

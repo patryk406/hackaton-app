@@ -21,8 +21,9 @@ const CampaignListView = ({ isLoading, hasError, campaigns, handleDelete }) => {
                     </Tr>
                 </Thead>
                 {campaigns && campaigns.map((elem) => <Campaign
-                    handleDelete={handleDelete}
                     key={elem.id}
+                    handleDelete={handleDelete}
+                    id={elem.id}
                     status={elem.fields.status}
                     created={elem.fields.created}
                     content={elem.fields.content}

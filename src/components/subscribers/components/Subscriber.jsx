@@ -4,13 +4,13 @@ import {
     Th,
 } from '@chakra-ui/react'
 
-function Subscriber({ convertTime, id, email, name, created }) {
+function Subscriber({ email, name, created }) {
     return (
-        <Tbody key={id}>
+        <Tbody>
             <Tr>
                 <Th px='1rem'>{email}</Th>
                 <Th>{name}</Th>
-                <Th px='1rem'>{convertTime(created)}</Th>
+                <Th px='1rem'>{new Date(created).toDateString()}</Th>
             </Tr>
         </Tbody>
     )
